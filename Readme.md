@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг»
 
-* Студент: [Александр Молодых](https://up.htmlacademy.ru/javascript/25/user/1564519).
-* Наставник: `Неизвестно`.
+- Студент: [Александр Молодых](https://up.htmlacademy.ru/javascript/25/user/1564519).
+- Наставник: [Дина Абрамова](https://htmlacademy.ru/profile/id1483099).
 
 ---
 
