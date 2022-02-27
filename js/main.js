@@ -57,10 +57,19 @@ const createLocation = () => ({
   lng: randFloat(139.7, 139.8, 5),
 });
 
-const createInfo = () => ({
-  author: createAuthor(),
-  offer: createOffer(),
-  location: createLocation(),
-});
+const createAd = () => {
+  const result = {
+    author: createAuthor(),
+    offer: createOffer(),
+    location: createLocation(),
+  };
+  result.offer.address = `${result.location.lat}, ${result.location.lng}`;
+  return result;
+};
 
-console.log(createInfo());
+const adPool = [];
+for (let i = 0; i < 10; i++) {
+  adPool.push(createAd());
+}
+
+console.log(adPool);
