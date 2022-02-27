@@ -22,13 +22,9 @@ const randLengthArray = (arr) => {
   return result;
 };
 
-const createAuthor = () => ({
-  avatar: `img/avatars/user${randInt(0, 10)}.png`,
-});
-
 const createOffer = () => ({
   title: "Квартира в новом доме со свежим ремонтом",
-  //address: `${this.location.lat}, ${this.location.lng}`,
+  address: "",
   price: randInt(0, 100000),
   type: ["palace", "flat", "house", "bungalow", "hotel"][randInt(0, 4)],
   rooms: randInt(1, 10),
@@ -59,7 +55,7 @@ const createLocation = () => ({
 
 const createAd = () => {
   const result = {
-    author: createAuthor(),
+    author: {},
     offer: createOffer(),
     location: createLocation(),
   };
@@ -68,8 +64,16 @@ const createAd = () => {
 };
 
 const adPool = [];
-for (let i = 0; i < 10; i++) {
-  adPool.push(createAd());
+for (let i = 1; i <= 10; i++) {
+  const ad = createAd();
+  let adNumber = "";
+  if (i === 10) {
+    adNumber += 10;
+  } else {
+    adNumber = "0" + i;
+  }
+  ad.author = {
+    avatar: `img/avatars/user${adNumber}.png`,
+  };
+  adPool.push(ad);
 }
-
-console.log(adPool);
