@@ -22,9 +22,9 @@ const randLengthArray = (arr) => {
   return result;
 };
 
-const createOffer = () => ({
+const createOffer = (location) => ({
   title: "Квартира в новом доме со свежим ремонтом",
-  address: "",
+  address: `${location.lat}, ${location.lng}`,
   price: randInt(0, 100000),
   type: ["palace", "flat", "house", "bungalow", "hotel"][randInt(0, 4)],
   rooms: randInt(1, 10),
@@ -54,10 +54,11 @@ const createLocation = () => ({
 });
 
 const createAd = () => {
+  const location = createLocation();
   const result = {
     author: {},
-    offer: createOffer(),
-    location: createLocation(),
+    offer: createOffer(location),
+    location: location,
   };
   result.offer.address = `${result.location.lat}, ${result.location.lng}`;
   return result;
