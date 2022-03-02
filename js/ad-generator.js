@@ -1,4 +1,4 @@
-import {randInt, randFloat} from './randvalues.js';
+import {randInt, randFloat} from './random-value-generator.js';
 
 const randLengthArray = (arr) => {
   const result = [];
