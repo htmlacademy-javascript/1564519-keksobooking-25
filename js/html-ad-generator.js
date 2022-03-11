@@ -21,7 +21,7 @@ const createPopup = (cardInfo) => {
   newCard.querySelector('.popup__text--capacity').textContent = `${rooms} комнаты для ${guests} гостей`;
   newCard.querySelector('.popup__text--time').textContent = `Заезд после ${checkin}, выезд до ${checkout}`;
   const featureList = newCard.querySelectorAll('.popup__feature');
-  if (features.length !== 0) {
+  if (!features || features.length !== 0) {
     featureList.forEach((el) => {
       const flatHasFeature = features.some((feature) => el.classList.contains(`popup__feature--${feature}`));
       if (!flatHasFeature) {
@@ -32,13 +32,13 @@ const createPopup = (cardInfo) => {
     newCard.querySelector('.popup__features').remove();
   }
   const popupDescription = newCard.querySelector('.popup__description');
-  if (description.length !== 0) {
+  if (!description || description.length !== 0) {
     popupDescription.textContent = description;
   } else {
     popupDescription.remove();
   }
   const photoList = newCard.querySelector('.popup__photos');
-  if (photos.length !== 0) {
+  if (!photos || photos.length !== 0) {
     const photoTemplate = photoList.querySelector('.popup__photo');
     photos.forEach((photo) => {
       const newPhoto = photoTemplate.cloneNode();
