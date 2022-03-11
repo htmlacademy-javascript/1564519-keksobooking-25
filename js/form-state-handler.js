@@ -1,31 +1,34 @@
 const formIsActive = false;
 
+const adForm = document.querySelector('.ad-form');
+const formFieldsets = adForm.querySelectorAll('fieldset');
+
+const mapFilterForm = document.querySelector('.map__filters');
+const mapFilters = mapFilterForm.querySelectorAll('.map__filter');
+
+const housingFeatureFilter = mapFilterForm.querySelector('fieldset');
+
 const switchFormStatus = (isActive) => {
-  const adForm = document.querySelector('.ad-form');
-  const formFieldsets = adForm.querySelectorAll('fieldset');
-  const mapFilterForm = document.querySelector('.map__filters');
-  const mapFilters = mapFilterForm.querySelectorAll('.map__filter');
-  const housingFeatureFilter = mapFilterForm.querySelector('fieldset');
   if (isActive) {
     adForm.classList.remove('ad-form--disabled');
     formFieldsets.forEach((fieldset) => {
-      fieldset.disabled = false;
+      fieldset.disabled = !isActive;
     });
     mapFilterForm.classList.remove('map__filters--disabled');
     mapFilters.forEach((mapFilter) => {
-      mapFilter.disabled = false;
+      mapFilter.disabled = !isActive;
     });
-    housingFeatureFilter.disabled = false;
+    housingFeatureFilter.disabled = !isActive;
   } else {
     adForm.classList.add('ad-form--disabled');
     formFieldsets.forEach((fieldset) => {
-      fieldset.disabled = true;
+      fieldset.disabled = !isActive;
     });
     mapFilterForm.classList.add('map__filters--disabled');
     mapFilters.forEach((mapFilter) => {
-      mapFilter.disabled = true;
+      mapFilter.disabled = !isActive;
     });
-    housingFeatureFilter.disabled = true;
+    housingFeatureFilter.disabled = !isActive;
   }
 };
 
