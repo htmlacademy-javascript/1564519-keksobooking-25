@@ -143,6 +143,7 @@
           method="post"
           enctype="multipart/form-data"
           autocomplete="off"
+          action='https://25.javascript.pages.academy/keksobooking'
         >
           <fieldset class="ad-form-header">
             <legend class="ad-form-header__title">
@@ -186,6 +187,12 @@
               name="title"
               type="text"
               placeholder="Милая, уютная квартирка в центре Токио"
+              required
+              minlength='30'
+              maxlength='100'
+              data-pristine-required-message='Обязательное поле'
+              data-pristine-pattern='/^[A-Za-zА-Яа-яЁё0-9]{30,100}$/'
+              data-pristine-pattern-message='Длина заголовка должна быть от 30 до 100 символов'
             />
           </fieldset>
           <fieldset class="ad-form__element ad-form__element--wide">
@@ -206,7 +213,7 @@
           </fieldset>
           <fieldset class="ad-form__element">
             <label class="ad-form__label" for="price">Цена за ночь, руб.</label>
-            <input id="price" name="price" type="number" placeholder="5000" />
+            <input id="price" name="price" type="number" placeholder="5000" min='1000' max='100000' required/>
             <div class="ad-form__slider"></div>
           </fieldset>
           <fieldset class="ad-form__element ad-form__element--time">
@@ -475,5 +482,7 @@
     <script src='./js/random-value-generator.js' type='module'></script>
     <script src='./js/html-ad-generator.js' type='module'></script>
     <script src='./js/form-state-handler.js' type='module'></script>
+    <script src="./js/form-validator.js" type='module'></script>
+    <script src='./pristine/pristine.min.js'></script>
   </body>
 </html>
