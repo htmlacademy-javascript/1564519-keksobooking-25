@@ -50,12 +50,12 @@ timeOutField.addEventListener('change', () => {
 
 const roomInput = document.querySelector('#room_number');
 const guestInput = document.querySelector('#capacity');
-function validateGuestInput (value) {
+function validateGuestInput () {
   return GuestOptions[roomInput.value].includes(Number(guestInput.value));
 }
 function getGuestErrorMessage () {
   const selectedRooms = roomInput.querySelector('option:checked');
-  const selectedGuests = guestInput.querySelector('option:checked')
+  const selectedGuests = guestInput.querySelector('option:checked');
   return `${selectedRooms.textContent} не подходит ${selectedGuests.textContent}`;
 }
 pristine.addValidator(guestInput, validateGuestInput, getGuestErrorMessage);
@@ -64,5 +64,5 @@ pristine.addValidator(roomInput, validateGuestInput, getGuestErrorMessage);
 
 form.addEventListener('submit', (evt) => {
   evt.preventDefault();
-  console.log(pristine.validate());
+  pristine.validate();
 });
