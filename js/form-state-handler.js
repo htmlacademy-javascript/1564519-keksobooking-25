@@ -1,4 +1,4 @@
-const formIsActive = false;
+const formIsActive = true;
 
 const adForm = document.querySelector('.ad-form');
 const formFieldsets = adForm.querySelectorAll('fieldset');
