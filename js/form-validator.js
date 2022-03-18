@@ -39,7 +39,7 @@ pristine.addValidator(titleInput, validateTitle, 'Поле является об
 
 const adType = document.querySelector('#type');
 const priceInput = document.querySelector('#price');
-const validateMinPriceInput = (value) => Number(value) > MinPricePerNight[adType.value.toUpperCase()] || Number(value) === 0;
+const validateMinPriceInput = (value) => Number(value) >= MinPricePerNight[adType.value.toUpperCase()] || Number(value) === 0;
 const validateMaxPriceInput = (value) => Number(value) <= MAXPRICE;
 const validatePriceInput = (value) => value.length;
 const getMinPriceErrorMessage = () => `Ночь в ${ErrorHouseNames[adType.value.toUpperCase()]} не может стоить меньше ${MinPricePerNight[adType.value.toUpperCase()]}`;
@@ -48,7 +48,7 @@ pristine.addValidator(priceInput, validateMinPriceInput, getMinPriceErrorMessage
 pristine.addValidator(priceInput, validateMaxPriceInput, getMaxPriceErrorMessage);
 pristine.addValidator(priceInput, validatePriceInput, 'Поле является обязательным.');
 adType.addEventListener('change', () => {
-  priceInput.placeholder = `${MinPricePerNight[adType.value.toUpperCase()] + 4000}`;
+  priceInput.placeholder = `${MinPricePerNight[adType.value.toUpperCase()]}`;
   pristine.validate(priceInput);
 });
 
@@ -72,16 +72,8 @@ const getGuestErrorMessage = () => {
   }
   return `${selectedRooms.textContent} ${roomInput.value === '1' ? 'не подходит' : 'не подходят'} ${selectedGuests.textContent}`;
 };
-const getRoomErrorMessage = () => {
-  const selectedRooms = roomInput.querySelector('option:checked');
-  const selectedGuests = guestInput.querySelector('option:checked');
-  if (roomInput.value === '100' && guestInput.value !== '0') {
-    return `${selectedRooms.textContent} ${guestInput.querySelector('option[value="0"]').textContent}`;
-  }
-  return `${selectedGuests.textContent} ${roomInput.value === '1' ? 'нужна' : 'нужно'} как минимум ${selectedRooms.textContent}`;
-};
 pristine.addValidator(guestInput, validateGuestInput, getGuestErrorMessage);
-pristine.addValidator(roomInput, validateGuestInput, getRoomErrorMessage);
+pristine.addValidator(roomInput, validateGuestInput);
 roomInput.addEventListener('change', () => {
   pristine.validate(guestInput);
 });
