@@ -1,14 +1,16 @@
 import { switchFormStatus } from './form-state-handler.js';
 import { adPool } from './ad-generator.js';
 import { createPopup } from './html-ad-generator.js';
+import { setUpValidator } from './form-validator.js';
 
 const map = L.map('map-canvas')
   .on('load', () => {
     switchFormStatus(true);
+    setUpValidator();
   })
   .setView({
-    lat: 35.68501,
-    lng: 139.75561,
+    lat: 35.68271,
+    lng: 139.75352,
   }, 12);
 
 L.tileLayer(
@@ -26,8 +28,8 @@ const mainPinIcon = L.icon({
 
 const mainPin = L.marker(
   {
-    lat: 35.68950,
-    lng: 139.69171,
+    lat: 35.68271,
+    lng: 139.75352,
   },
   {
     draggable: true,

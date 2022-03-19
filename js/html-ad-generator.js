@@ -1,9 +1,9 @@
 const СardType = {
-  flat: 'Квартира',
-  bungalow: 'Бунгало',
-  house: 'Дом',
-  palace: 'Дворец',
-  hotel: 'Отель'
+  FLAT: 'Квартира',
+  BUNGALOW: 'Бунгало',
+  HOUSE: 'Дом',
+  PALACE: 'Дворец',
+  HOTEL: 'Отель'
 };
 
 const cardTemplate = document.querySelector('#card').content.querySelector('.popup');
@@ -15,7 +15,7 @@ const createPopup = (cardInfo) => {
   newCard.querySelector('.popup__title').textContent = title;
   newCard.querySelector('.popup__text--address').textContent = `Координаты: ${address}`;
   newCard.querySelector('.popup__text--price').textContent = `${price} ₽/ночь`;
-  newCard.querySelector('.popup__type').textContent = СardType[type];
+  newCard.querySelector('.popup__type').textContent = СardType[type.toUpperCase()];
   newCard.querySelector('.popup__text--capacity').textContent = `${rooms} комнаты для ${guests} гостей`;
   newCard.querySelector('.popup__text--time').textContent = `Заезд после ${checkin}, выезд до ${checkout}`;
   const featureList = newCard.querySelectorAll('.popup__feature');
