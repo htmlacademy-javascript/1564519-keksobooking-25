@@ -11,7 +11,7 @@ const map = L.map('map-canvas')
   .setView({
     lat: 35.68271,
     lng: 139.75352,
-  }, 12);
+  }, 13);
 
 L.tileLayer(
   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',

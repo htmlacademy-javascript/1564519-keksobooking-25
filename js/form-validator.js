@@ -48,8 +48,40 @@ const setUpValidator = () => {
   pristine.addValidator(priceInput, validateMinPriceInput, getMinPriceErrorMessage);
   pristine.addValidator(priceInput, validateMaxPriceInput, getMaxPriceErrorMessage);
   pristine.addValidator(priceInput, validatePriceInput, 'Обязательное поле.');
+
+  const slider = document.querySelector('.ad-form__slider');
+  noUiSlider.create(slider, {
+    range: {
+      'min': MinPricePerNight[adType.value.toUpperCase()],
+      'max': MAXPRICE,
+    },
+    start: MinPricePerNight[adType.value.toUpperCase()],
+    step: 1,
+    connect: 'lower',
+    format: {
+      to: function (value) {
+        return value.toFixed(0);
+      },
+      from: function (value) {
+        return parseFloat(value);
+      },
+    },
+  });
+  slider.noUiSlider.on('update', () => {
+    const currentPrice = slider.noUiSlider.get();
+    priceInput.value = currentPrice;
+  });
+  priceInput.addEventListener('focusout', () => {
+    slider.noUiSlider.set(priceInput.value);
+  });
   adType.addEventListener('change', () => {
     priceInput.placeholder = `${MinPricePerNight[adType.value.toUpperCase()]}`;
+    slider.noUiSlider.updateOptions({
+      range: {
+        min: MinPricePerNight[adType.value.toUpperCase()],
+        max: MAXPRICE,
+      }
+    });
     pristine.validate(priceInput);
   });
 
