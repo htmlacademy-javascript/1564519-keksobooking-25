@@ -1,4 +1,3 @@
-import { adPool } from './ad-generator.js';
 const СardType = {
   flat: 'Квартира',
   bungalow: 'Бунгало',
@@ -8,7 +7,6 @@ const СardType = {
 };
 
 const cardTemplate = document.querySelector('#card').content.querySelector('.popup');
-const popupList = [];
 
 const createPopup = (cardInfo) => {
   const newCard = cardTemplate.cloneNode(true);
@@ -53,7 +51,4 @@ const createPopup = (cardInfo) => {
   return newCard;
 };
 
-adPool.forEach((ad) => {
-  const newPopup = createPopup(ad);
-  popupList.push(newPopup);
-});
+export {createPopup};
