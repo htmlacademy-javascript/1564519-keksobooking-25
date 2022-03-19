@@ -57,6 +57,3 @@ adPool.forEach((ad) => {
   const newPopup = createPopup(ad);
   popupList.push(newPopup);
 });
-
-const targetBlock = document.querySelector('#map-canvas');
-targetBlock.appendChild(popupList[9]);
