@@ -1,5 +1,3 @@
-const formIsActive = true;
-
 const adForm = document.querySelector('.ad-form');
 const formFieldsets = adForm.querySelectorAll('fieldset');
 
@@ -32,4 +30,4 @@ const switchFormStatus = (isActive) => {
   }
 };
 
-switchFormStatus(formIsActive);
+export {switchFormStatus};

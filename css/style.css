@@ -1053,3 +1053,8 @@ fieldset {
 .hidden {
   display: none;
 }
+
+.ad-form__error-text {
+  color: red;
+  padding: 3px 20px 0 0;
+}
