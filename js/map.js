@@ -2,16 +2,18 @@ import { switchFormStatus } from './form-state-handler.js';
 import { adPool } from './ad-generator.js';
 import { createPopup } from './html-ad-generator.js';
 import { setUpValidator } from './form-validator.js';
+const MAP_CENTER = {
+  lat: 35.68271,
+  lng: 139.75352,
+};
+const DECIMAL_POINT = 5;
 
 const map = L.map('map-canvas')
   .on('load', () => {
     switchFormStatus(true);
     setUpValidator();
   })
-  .setView({
-    lat: 35.68271,
-    lng: 139.75352,
-  }, 13);
+  .setView(MAP_CENTER, 13);
 
 L.tileLayer(
   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -27,10 +29,7 @@ const mainPinIcon = L.icon({
 });
 
 const mainPin = L.marker(
-  {
-    lat: 35.68271,
-    lng: 139.75352,
-  },
+  MAP_CENTER,
   {
     draggable: true,
     icon: mainPinIcon,
@@ -41,9 +40,9 @@ mainPin.addTo(map);
 const address = document.querySelector('#address');
 address.disabled = true;
 address.value = `${mainPin.getLatLng()['lat']}, ${mainPin.getLatLng()['lng']}`;
-mainPin.on('moveend', (evt) => {
+mainPin.on('move', (evt) => {
   const {lat, lng} = evt.target.getLatLng();
-  address.value = `${lat.toFixed(5)}, ${lng.toFixed(5)}`;
+  address.value = `${lat.toFixed(DECIMAL_POINT)}, ${lng.toFixed(DECIMAL_POINT)}`;
 });
 
 const adPinIcon = L.icon({

@@ -18,9 +18,9 @@ const GuestOptions = {
   3: [1, 2, 3],
   100: [0]
 };
-const TITLEMINLENGTH = 30;
-const TITLEMAXLENGTH = 100;
-const MAXPRICE = 100000;
+const TITLE_MIN_LENGTH = 30;
+const TITLE_MAX_LENGTH = 100;
+const MAX_PRICE = 100000;
 
 const setUpValidator = () => {
   const form = document.querySelector('.ad-form');
@@ -32,19 +32,19 @@ const setUpValidator = () => {
 
   const titleInput = document.querySelector('#title');
   const validateTitleLanguage = (value) => value.match(/^[A-Za-zА-Яа-яЁё0-9]*$/);
-  const validateTitleLength = (value) => (value.length >= TITLEMINLENGTH && value.length <= TITLEMAXLENGTH) || value.length === 0;
+  const validateTitleLength = (value) => (value.length >= TITLE_MIN_LENGTH && value.length <= TITLE_MAX_LENGTH) || value.length === 0;
   const validateTitle = (value) => value.length;
   pristine.addValidator(titleInput, validateTitleLanguage, 'Заголовок объявления должен состоять из букв русского или латинского алфавита и цифр.');
-  pristine.addValidator(titleInput, validateTitleLength, `Длина заголовка должна быть больше ${TITLEMINLENGTH} и меньше ${TITLEMAXLENGTH} символов.`);
+  pristine.addValidator(titleInput, validateTitleLength, `Длина заголовка должна быть больше ${TITLE_MIN_LENGTH} и меньше ${TITLE_MAX_LENGTH} символов.`);
   pristine.addValidator(titleInput, validateTitle, 'Обязательное поле.');
 
   const adType = document.querySelector('#type');
   const priceInput = document.querySelector('#price');
   const validateMinPriceInput = (value) => Number(value) >= MinPricePerNight[adType.value.toUpperCase()] || Number(value) === 0;
-  const validateMaxPriceInput = (value) => Number(value) <= MAXPRICE;
+  const validateMaxPriceInput = (value) => Number(value) <= MAX_PRICE;
   const validatePriceInput = (value) => value.length;
   const getMinPriceErrorMessage = () => `Ночь в ${ErrorHouseNames[adType.value.toUpperCase()]} не может стоить меньше ${MinPricePerNight[adType.value.toUpperCase()]}`;
-  const getMaxPriceErrorMessage = () => `Цена за ночь не должна превышать ${MAXPRICE}`;
+  const getMaxPriceErrorMessage = () => `Цена за ночь не должна превышать ${MAX_PRICE}`;
   pristine.addValidator(priceInput, validateMinPriceInput, getMinPriceErrorMessage);
   pristine.addValidator(priceInput, validateMaxPriceInput, getMaxPriceErrorMessage);
   pristine.addValidator(priceInput, validatePriceInput, 'Обязательное поле.');
@@ -53,18 +53,14 @@ const setUpValidator = () => {
   noUiSlider.create(slider, {
     range: {
       'min': MinPricePerNight[adType.value.toUpperCase()],
-      'max': MAXPRICE,
+      'max': MAX_PRICE,
     },
     start: MinPricePerNight[adType.value.toUpperCase()],
     step: 1,
     connect: 'lower',
     format: {
-      to: function (value) {
-        return value.toFixed(0);
-      },
-      from: function (value) {
-        return parseFloat(value);
-      },
+      to: (value) => value.toFixed(0),
+      from: (value) => parseFloat(value),
     },
   });
   slider.noUiSlider.on('update', () => {
@@ -79,7 +75,7 @@ const setUpValidator = () => {
     slider.noUiSlider.updateOptions({
       range: {
         min: MinPricePerNight[adType.value.toUpperCase()],
-        max: MAXPRICE,
+        max: MAX_PRICE,
       }
     });
     pristine.validate(priceInput);
