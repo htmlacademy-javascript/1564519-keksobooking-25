@@ -1,4 +1,4 @@
-import { createSuccessMessage, createErrorMessage } from './util.js';
+import { createMessage } from './util.js';
 
 const MinPricePerNight = {
   FLAT: 1000,
@@ -124,8 +124,8 @@ const setUpValidator = () => {
         }
       )
         .then(() => evt.target.reset())
-        .then(() => createSuccessMessage())
-        .catch(() => createErrorMessage());
+        .then(() => createMessage('success'))
+        .catch(() => createMessage('error'));
     }
   });
 };
