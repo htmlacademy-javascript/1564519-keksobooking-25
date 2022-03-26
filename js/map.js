@@ -1,5 +1,4 @@
 import { switchFormStatus } from './form-state-handler.js';
-import { adPool } from './ad-generator.js';
 import { createPopup } from './html-ad-generator.js';
 import { setUpValidator } from './form-validator.js';
 const MAP_CENTER = {
@@ -52,17 +51,21 @@ const adPinIcon = L.icon({
   iconAnchor: [20, 40],
 });
 
-adPool.forEach((el) => {
-  const adPin = L.marker(
-    {
-      lat: el['location']['lat'],
-      lng: el['location']['lng'],
-    },
-    {
-      icon: adPinIcon,
-    }
-  );
-  adPin
-    .addTo(map)
-    .bindPopup(createPopup(el));
-});
+const renderAdPins = (adPool) => {
+  adPool.forEach((el) => {
+    const adPin = L.marker(
+      {
+        lat: el['location']['lat'],
+        lng: el['location']['lng'],
+      },
+      {
+        icon: adPinIcon,
+      }
+    );
+    adPin
+      .addTo(map)
+      .bindPopup(createPopup(el));
+  });
+};
+
+export { renderAdPins };
