@@ -8,6 +8,7 @@ const MAP_CENTER = {
 };
 const DECIMAL_POINT = 5;
 
+switchFormStatus(false);
 const map = L.map('map-canvas')
   .on('load', () => {
     switchFormStatus(true);
