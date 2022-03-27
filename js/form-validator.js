@@ -31,10 +31,8 @@ const pristine = new Pristine(form, {
 
 const setUpValidator = () => {
   const titleInput = document.querySelector('#title');
-  const validateTitleLanguage = (value) => value.match(/^[A-Za-zА-Яа-яЁё0-9]*$/);
   const validateTitleLength = (value) => (value.length >= TITLE_MIN_LENGTH && value.length <= TITLE_MAX_LENGTH) || value.length === 0;
   const validateTitle = (value) => value.length;
-  pristine.addValidator(titleInput, validateTitleLanguage, 'Заголовок объявления должен состоять из букв русского или латинского алфавита и цифр.');
   pristine.addValidator(titleInput, validateTitleLength, `Длина заголовка должна быть больше ${TITLE_MIN_LENGTH} и меньше ${TITLE_MAX_LENGTH} символов.`);
   pristine.addValidator(titleInput, validateTitle, 'Обязательное поле.');
 
