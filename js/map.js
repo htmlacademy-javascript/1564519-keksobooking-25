@@ -49,6 +49,7 @@ mainPin.on('move', (evt) => {
 const resetMainPin = () => {
   mainPin.setLatLng(MAP_CENTER);
   address.value = `${MAP_CENTER['lat']}, ${MAP_CENTER['lng']}`;
+  map.setView(MAP_CENTER, 13);
 };
 
 const adPinIcon = L.icon({

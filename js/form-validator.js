@@ -1,5 +1,3 @@
-import { createMessage } from './util.js';
-
 const MinPricePerNight = {
   FLAT: 1000,
   BUNGALOW: 0,
@@ -24,14 +22,14 @@ const TITLE_MIN_LENGTH = 30;
 const TITLE_MAX_LENGTH = 100;
 const MAX_PRICE = 100000;
 
-const setUpValidator = () => {
-  const form = document.querySelector('.ad-form');
-  const pristine = new Pristine(form, {
-    classTo: 'ad-form__element',
-    errorTextParent: 'ad-form__element',
-    errorTextClass: 'ad-form__error-text'
-  }, true);
+const form = document.querySelector('.ad-form');
+const pristine = new Pristine(form, {
+  classTo: 'ad-form__element',
+  errorTextParent: 'ad-form__element',
+  errorTextClass: 'ad-form__error-text'
+}, true);
 
+const setUpValidator = () => {
   const titleInput = document.querySelector('#title');
   const validateTitleLanguage = (value) => value.match(/^[A-Za-zА-Яа-яЁё0-9]*$/);
   const validateTitleLength = (value) => (value.length >= TITLE_MIN_LENGTH && value.length <= TITLE_MAX_LENGTH) || value.length === 0;
@@ -111,23 +109,6 @@ const setUpValidator = () => {
   guestInput.addEventListener('change', () => {
     pristine.validate(roomInput);
   });
-
-  form.addEventListener('submit', (evt) => {
-    evt.preventDefault();
-    const isValid = pristine.validate();
-    if (isValid) {
-      const formData = new FormData(evt.target);
-      fetch('https://25.javascript.pages.academy/keksobooking',
-        {
-          method: 'POST',
-          body: formData,
-        }
-      )
-        .then(() => evt.target.reset())
-        .then(() => createMessage('success'))
-        .catch(() => createMessage('error'));
-    }
-  });
 };
 
-export {setUpValidator};
+export {setUpValidator, pristine};
