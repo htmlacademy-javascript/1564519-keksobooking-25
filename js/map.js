@@ -46,6 +46,11 @@ mainPin.on('move', (evt) => {
   address.value = `${lat.toFixed(DECIMAL_POINT)}, ${lng.toFixed(DECIMAL_POINT)}`;
 });
 
+const resetMainPin = () => {
+  mainPin.setLatLng(MAP_CENTER);
+  address.value = `${MAP_CENTER['lat']}, ${MAP_CENTER['lng']}`;
+};
+
 const adPinIcon = L.icon({
   iconUrl: 'img/pin.svg',
   iconSize: [40, 40],
@@ -69,4 +74,4 @@ const createPin = (element) => {
 
 const renderAdPins = (adPool) => adPool.forEach(createPin);
 
-export { createPin, renderAdPins };
+export { createPin, renderAdPins, resetMainPin };
