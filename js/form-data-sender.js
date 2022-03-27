@@ -1,8 +1,9 @@
 import { pristine } from './form-validator.js';
-import { createMessage } from './util.js';
+import { createMessage, ERROR_TYPE, SUCCESS_TYPE } from './util.js';
 import { resetMainPin } from './map.js';
 
 const FLAT_STANDARD_PRICE = 1000;
+const REQUEST_TARGET = 'https://25.javascript.pages.academy/keksobooking';
 
 const form = document.querySelector('.ad-form');
 const adPrice = document.querySelector('#price');
@@ -13,7 +14,7 @@ form.addEventListener('submit', (evt) => {
   const isValid = pristine.validate();
   if (isValid) {
     const formData = new FormData(evt.target);
-    fetch('https://25.javascript.pages.academy/keksobooking',
+    fetch(REQUEST_TARGET,
       {
         method: 'POST',
         body: formData,
@@ -27,7 +28,7 @@ form.addEventListener('submit', (evt) => {
           start: FLAT_STANDARD_PRICE,
         });
       })
-      .then(() => createMessage('success'))
-      .catch(() => createMessage('error'));
+      .then(() => createMessage(SUCCESS_TYPE))
+      .catch(() => createMessage(ERROR_TYPE));
   }
 });

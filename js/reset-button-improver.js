@@ -1,6 +1,5 @@
 import { resetMainPin } from './map.js';
-
-const FLAT_STANDARD_PRICE = 1000;
+import { MinPricePerNight } from './form-validator.js';
 
 const resetButton = document.querySelector('.ad-form__reset');
 const form = document.querySelector('.ad-form');
@@ -11,8 +10,8 @@ resetButton.addEventListener('click', (evt) => {
   evt.preventDefault();
   form.reset();
   resetMainPin();
-  adPrice.value = FLAT_STANDARD_PRICE;
+  adPrice.value = MinPricePerNight['FLAT'];
   slider.noUiSlider.updateOptions({
-    start: FLAT_STANDARD_PRICE,
+    start: MinPricePerNight['FLAT'],
   });
 });

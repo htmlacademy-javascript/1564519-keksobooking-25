@@ -1,4 +1,4 @@
-const СardType = {
+const CardType = {
   FLAT: 'Квартира',
   BUNGALOW: 'Бунгало',
   HOUSE: 'Дом',
@@ -15,7 +15,7 @@ const createPopup = (cardInfo) => {
   newCard.querySelector('.popup__title').textContent = title;
   newCard.querySelector('.popup__text--address').textContent = `Координаты: ${address}`;
   newCard.querySelector('.popup__text--price').textContent = `${price} ₽/ночь`;
-  newCard.querySelector('.popup__type').textContent = СardType[type.toUpperCase()];
+  newCard.querySelector('.popup__type').textContent = CardType[type.toUpperCase()];
   newCard.querySelector('.popup__text--capacity').textContent = `${rooms} комнаты для ${guests} гостей`;
   newCard.querySelector('.popup__text--time').textContent = `Заезд после ${checkin}, выезд до ${checkout}`;
   const featureList = newCard.querySelectorAll('.popup__feature');

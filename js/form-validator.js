@@ -109,4 +109,4 @@ const setUpValidator = () => {
   });
 };
 
-export {setUpValidator, pristine};
+export {setUpValidator, pristine, MinPricePerNight};
