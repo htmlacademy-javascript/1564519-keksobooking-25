@@ -6,6 +6,9 @@ const MAP_CENTER = {
   lat: 35.68271,
   lng: 139.75352,
 };
+const MAP_SCALE = 13;
+const MAIN_PIN_SIDE_LENGTH = 52;
+const AD_PIN_SIDE_LENGTH = 40;
 const DECIMAL_POINT = 5;
 
 switchFormStatus(false);
@@ -14,7 +17,7 @@ const map = L.map('map-canvas')
     switchFormStatus(true);
     setUpValidator();
   })
-  .setView(MAP_CENTER, 13);
+  .setView(MAP_CENTER, MAP_SCALE);
 
 L.tileLayer(
   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -25,8 +28,8 @@ L.tileLayer(
 
 const mainPinIcon = L.icon({
   iconUrl: 'img/main-pin.svg',
-  iconSize: [52, 52],
-  iconAnchor: [26, 52],
+  iconSize: [MAIN_PIN_SIDE_LENGTH, MAIN_PIN_SIDE_LENGTH],
+  iconAnchor: [MAIN_PIN_SIDE_LENGTH / 2, MAIN_PIN_SIDE_LENGTH],
 });
 
 const mainPin = L.marker(
@@ -49,13 +52,13 @@ mainPin.on('move', (evt) => {
 const resetMainPin = () => {
   mainPin.setLatLng(MAP_CENTER);
   address.value = `${MAP_CENTER['lat']}, ${MAP_CENTER['lng']}`;
-  map.setView(MAP_CENTER, 13);
+  map.setView(MAP_CENTER, MAP_SCALE);
 };
 
 const adPinIcon = L.icon({
   iconUrl: 'img/pin.svg',
-  iconSize: [40, 40],
-  iconAnchor: [20, 40],
+  iconSize: [AD_PIN_SIDE_LENGTH, AD_PIN_SIDE_LENGTH],
+  iconAnchor: [AD_PIN_SIDE_LENGTH / 2, AD_PIN_SIDE_LENGTH],
 });
 
 const createPin = (element) => {
