@@ -5,11 +5,11 @@ import { resetMainPin } from './map.js';
 const FLAT_STANDARD_PRICE = 1000;
 
 const form = document.querySelector('.ad-form');
+const adPrice = document.querySelector('#price');
+const slider = document.querySelector('.ad-form__slider');
 
 form.addEventListener('submit', (evt) => {
   evt.preventDefault();
-  const adPrice = document.querySelector('#price');
-  const slider = document.querySelector('.ad-form__slider');
   const isValid = pristine.validate();
   if (isValid) {
     const formData = new FormData(evt.target);
