@@ -20,15 +20,19 @@ form.addEventListener('submit', (evt) => {
         body: formData,
       }
     )
-      .then(() => {
-        evt.target.reset();
-        resetMainPin();
-        adPrice.value = FLAT_STANDARD_PRICE;
-        slider.noUiSlider.updateOptions({
-          start: FLAT_STANDARD_PRICE,
-        });
+      .then((response) => {
+        if (response.ok) {
+          evt.target.reset();
+          resetMainPin();
+          adPrice.value = FLAT_STANDARD_PRICE;
+          slider.noUiSlider.updateOptions({
+            start: FLAT_STANDARD_PRICE,
+          });
+          createMessage(SUCCESS_TYPE);
+        } else {
+          createMessage(ERROR_TYPE);
+        }
       })
-      .then(() => createMessage(SUCCESS_TYPE))
       .catch(() => createMessage(ERROR_TYPE));
   }
 });
