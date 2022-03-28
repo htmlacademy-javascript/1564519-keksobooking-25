@@ -1,19 +1,23 @@
 import { switchFormStatus } from './form-state-handler.js';
-import { adPool } from './ad-generator.js';
 import { createPopup } from './html-ad-generator.js';
 import { setUpValidator } from './form-validator.js';
+
 const MAP_CENTER = {
   lat: 35.68271,
   lng: 139.75352,
 };
+const MAP_SCALE = 13;
+const MAIN_PIN_SIDE_LENGTH = 52;
+const AD_PIN_SIDE_LENGTH = 40;
 const DECIMAL_POINT = 5;
 
+switchFormStatus(false);
 const map = L.map('map-canvas')
   .on('load', () => {
     switchFormStatus(true);
     setUpValidator();
   })
-  .setView(MAP_CENTER, 13);
+  .setView(MAP_CENTER, MAP_SCALE);
 
 L.tileLayer(
   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -24,8 +28,8 @@ L.tileLayer(
 
 const mainPinIcon = L.icon({
   iconUrl: 'img/main-pin.svg',
-  iconSize: [52, 52],
-  iconAnchor: [26, 52],
+  iconSize: [MAIN_PIN_SIDE_LENGTH, MAIN_PIN_SIDE_LENGTH],
+  iconAnchor: [MAIN_PIN_SIDE_LENGTH / 2, MAIN_PIN_SIDE_LENGTH],
 });
 
 const mainPin = L.marker(
@@ -38,24 +42,30 @@ const mainPin = L.marker(
 mainPin.addTo(map);
 
 const address = document.querySelector('#address');
-address.disabled = true;
+address.readOnly = true;
 address.value = `${mainPin.getLatLng()['lat']}, ${mainPin.getLatLng()['lng']}`;
 mainPin.on('move', (evt) => {
   const {lat, lng} = evt.target.getLatLng();
   address.value = `${lat.toFixed(DECIMAL_POINT)}, ${lng.toFixed(DECIMAL_POINT)}`;
 });
 
+const resetMainPin = () => {
+  mainPin.setLatLng(MAP_CENTER);
+  address.value = `${MAP_CENTER['lat']}, ${MAP_CENTER['lng']}`;
+  map.setView(MAP_CENTER, MAP_SCALE);
+};
+
 const adPinIcon = L.icon({
   iconUrl: 'img/pin.svg',
-  iconSize: [40, 40],
-  iconAnchor: [20, 40],
+  iconSize: [AD_PIN_SIDE_LENGTH, AD_PIN_SIDE_LENGTH],
+  iconAnchor: [AD_PIN_SIDE_LENGTH / 2, AD_PIN_SIDE_LENGTH],
 });
 
-adPool.forEach((el) => {
+const createPin = (element) => {
   const adPin = L.marker(
     {
-      lat: el['location']['lat'],
-      lng: el['location']['lng'],
+      lat: element['location']['lat'],
+      lng: element['location']['lng'],
     },
     {
       icon: adPinIcon,
@@ -63,5 +73,9 @@ adPool.forEach((el) => {
   );
   adPin
     .addTo(map)
-    .bindPopup(createPopup(el));
-});
+    .bindPopup(createPopup(element));
+};
+
+const renderAdPins = (adPool) => adPool.forEach(createPin);
+
+export { createPin, renderAdPins, resetMainPin };

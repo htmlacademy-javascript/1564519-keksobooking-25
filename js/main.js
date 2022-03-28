@@ -1,6 +1,8 @@
-import './ad-generator.js';
 import './form-state-handler.js';
 import './form-validator.js';
 import './html-ad-generator.js';
-import './random-value-generator.js';
+import './util.js';
 import './map.js';
+import './similar-ad-pins-renderer.js';
+import './form-data-sender.js';
+import './reset-button-improver.js';

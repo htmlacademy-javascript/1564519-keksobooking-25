@@ -22,19 +22,17 @@ const TITLE_MIN_LENGTH = 30;
 const TITLE_MAX_LENGTH = 100;
 const MAX_PRICE = 100000;
 
-const setUpValidator = () => {
-  const form = document.querySelector('.ad-form');
-  const pristine = new Pristine(form, {
-    classTo: 'ad-form__element',
-    errorTextParent: 'ad-form__element',
-    errorTextClass: 'ad-form__error-text'
-  }, true);
+const form = document.querySelector('.ad-form');
+const pristine = new Pristine(form, {
+  classTo: 'ad-form__element',
+  errorTextParent: 'ad-form__element',
+  errorTextClass: 'ad-form__error-text'
+}, true);
 
+const setUpValidator = () => {
   const titleInput = document.querySelector('#title');
-  const validateTitleLanguage = (value) => value.match(/^[A-Za-zА-Яа-яЁё0-9]*$/);
   const validateTitleLength = (value) => (value.length >= TITLE_MIN_LENGTH && value.length <= TITLE_MAX_LENGTH) || value.length === 0;
   const validateTitle = (value) => value.length;
-  pristine.addValidator(titleInput, validateTitleLanguage, 'Заголовок объявления должен состоять из букв русского или латинского алфавита и цифр.');
   pristine.addValidator(titleInput, validateTitleLength, `Длина заголовка должна быть больше ${TITLE_MIN_LENGTH} и меньше ${TITLE_MAX_LENGTH} символов.`);
   pristine.addValidator(titleInput, validateTitle, 'Обязательное поле.');
 
@@ -109,11 +107,6 @@ const setUpValidator = () => {
   guestInput.addEventListener('change', () => {
     pristine.validate(roomInput);
   });
-
-  form.addEventListener('submit', (evt) => {
-    evt.preventDefault();
-    pristine.validate();
-  });
 };
 
-export {setUpValidator};
+export {setUpValidator, pristine, MinPricePerNight};
