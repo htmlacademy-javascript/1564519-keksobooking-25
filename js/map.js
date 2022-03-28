@@ -42,7 +42,7 @@ const mainPin = L.marker(
 mainPin.addTo(map);
 
 const address = document.querySelector('#address');
-address.disabled = true;
+address.readOnly = true;
 address.value = `${mainPin.getLatLng()['lat']}, ${mainPin.getLatLng()['lng']}`;
 mainPin.on('move', (evt) => {
   const {lat, lng} = evt.target.getLatLng();
