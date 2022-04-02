@@ -6,3 +6,4 @@ import './map.js';
 import './similar-ad-pins-renderer.js';
 import './form-data-sender.js';
 import './reset-button-improver.js';
+import './ad-filter.js';

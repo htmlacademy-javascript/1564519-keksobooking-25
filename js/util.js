@@ -2,6 +2,54 @@ const MESSAGE_CLOSE_KEY = 'Escape';
 const SUCCESS_TYPE = 'success';
 const ERROR_TYPE = 'error';
 
+const LOW_PRICE = 10000;
+const MEDIUM_PRICE = 50000;
+const HIGH_PRICE = 100000;
+
+const typeOfPrice = (price) => {
+  if (price < LOW_PRICE) {
+    return 'low';
+  } else if (price < MEDIUM_PRICE) {
+    return 'middle';
+  } else if (price < HIGH_PRICE) {
+    return 'high';
+  }
+};
+
+const doFeaturesMatch = (filterAdFeatures, similarAdFeatures) => {
+  let matchingFeaturesCount = 0;
+  filterAdFeatures.forEach((feature) => {
+    if (similarAdFeatures && similarAdFeatures.some((similarFeature) => similarFeature === feature)) {
+      matchingFeaturesCount++;
+    }
+  });
+  if (matchingFeaturesCount === filterAdFeatures.length) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
+const adOffer = {
+  type: 'any',
+  price: 'any',
+  rooms: 'any',
+  guests: 'any',
+  features: [],
+};
+
+const isAdSimilar = (filterAd, similarAd) => {
+  if  ( (filterAd['type'] === similarAd['type'] || filterAd['type'] === 'any') &&
+        (filterAd['price'] === typeOfPrice(similarAd['price']) || filterAd['price'] === 'any') &&
+        (filterAd['rooms'] === String(similarAd['rooms']) || filterAd['rooms'] === 'any') &&
+        (filterAd['guests'] === String(similarAd['guests']) || filterAd['guests'] === 'any') &&
+        (doFeaturesMatch(filterAd['features'], similarAd['features']) || filterAd['features'].length === 0)) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
 const showPinLoadErrorMessage = (message) => {
   const errorContainer = document.createElement('div');
   errorContainer.style.zIndex = '1000';
@@ -35,4 +83,13 @@ const createMessage = (type) => {
   }
 };
 
-export {showPinLoadErrorMessage, createMessage, ERROR_TYPE, SUCCESS_TYPE};
+const switchFeatureFilter = (array, feature) => {
+  if (array.some((el) => el === feature)) {
+    const featureIndex = array.indexOf(feature);
+    array.splice(featureIndex, 1);
+  } else {
+    array.push(feature);
+  }
+};
+
+export {showPinLoadErrorMessage, createMessage, ERROR_TYPE, SUCCESS_TYPE, switchFeatureFilter, adOffer, isAdSimilar};
