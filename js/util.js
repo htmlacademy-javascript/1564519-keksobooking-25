@@ -50,6 +50,14 @@ const isAdSimilar = (filterAd, similarAd) => {
   }
 };
 
+function debounce (callback, timeoutDelay = 500) {
+  let timeoutId;
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+}
+
 const showPinLoadErrorMessage = (message) => {
   const errorContainer = document.createElement('div');
   errorContainer.style.zIndex = '1000';
@@ -92,4 +100,4 @@ const switchFeatureFilter = (array, feature) => {
   }
 };
 
-export {showPinLoadErrorMessage, createMessage, ERROR_TYPE, SUCCESS_TYPE, switchFeatureFilter, adOffer, isAdSimilar};
+export { debounce, showPinLoadErrorMessage, createMessage, ERROR_TYPE, SUCCESS_TYPE, switchFeatureFilter, adOffer, isAdSimilar};

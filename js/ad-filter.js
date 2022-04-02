@@ -1,18 +1,20 @@
-import { switchFeatureFilter, adOffer, isAdSimilar } from './util.js';
+import { switchFeatureFilter, adOffer, isAdSimilar, debounce } from './util.js';
 import { renderAdPins } from './map.js';
 import { SIMILAR_ADS_COUNT } from './similar-ad-pins-renderer.js';
+
+const RERENDER_DELAY = 1;
 
 const mapFiltersContainer = document.querySelectorAll('.map__filter, .map__checkbox');
 
 const turnSimilarAdPinFilterOn = (data) => {
   mapFiltersContainer.forEach((filterInput) => {
-    filterInput.addEventListener('change', () => {
+    filterInput.addEventListener('change', debounce(() => {
       if (filterInput.type === 'checkbox') {
         switchFeatureFilter(adOffer['features'], filterInput.value);
       } else {
         adOffer[`${filterInput.id.split('-')[1]}`] = filterInput.value;
       }
-      const dataForPins = data.filter((ad) => isAdSimilar(adOffer, ad['offer']));
+      const dataForPins = data.filter((ad) => isAdSimilar(adOffer, ad['offer'])).slice(0, SIMILAR_ADS_COUNT);
       const pins = document.querySelectorAll('.leaflet-marker-icon');
       const popup = document.querySelector('.leaflet-popup-content-wrapper');
       if (popup) {
@@ -23,8 +25,8 @@ const turnSimilarAdPinFilterOn = (data) => {
           el.remove();
         }
       });
-      renderAdPins(dataForPins.slice(0, SIMILAR_ADS_COUNT));
-    });
+      renderAdPins(dataForPins)
+    }), RERENDER_DELAY);
   });
 };
 
