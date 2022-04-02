@@ -2,7 +2,7 @@ import { switchFeatureFilter, adOffer, isAdSimilar, debounce } from './util.js';
 import { renderAdPins } from './map.js';
 import { SIMILAR_ADS_COUNT } from './similar-ad-pins-renderer.js';
 
-const RERENDER_DELAY = 1;
+const RERENDER_DELAY = 500;
 
 const mapFiltersContainer = document.querySelectorAll('.map__filter, .map__checkbox');
 
@@ -25,8 +25,8 @@ const turnSimilarAdPinFilterOn = (data) => {
           el.remove();
         }
       });
-      renderAdPins(dataForPins)
-    }), RERENDER_DELAY);
+      renderAdPins(dataForPins);
+    }, RERENDER_DELAY));
   });
 };
 
