@@ -1,17 +1,20 @@
 const MESSAGE_CLOSE_KEY = 'Escape';
 const SUCCESS_TYPE = 'success';
 const ERROR_TYPE = 'error';
+const AD_OFFER_DEFAULT_VALUE = 'any';
 
-const LOW_PRICE = 10000;
-const MEDIUM_PRICE = 50000;
-const HIGH_PRICE = 100000;
+const PriceByTypes = {
+  LOW_PRICE: 10000,
+  MEDIUM_PRICE: 50000,
+  HIGH_PRICE: 100000
+};
 
 const typeOfPrice = (price) => {
-  if (price < LOW_PRICE) {
+  if (price < PriceByTypes.LOW_PRICE) {
     return 'low';
-  } else if (price < MEDIUM_PRICE) {
+  } else if (price < PriceByTypes.MEDIUM_PRICE) {
     return 'middle';
-  } else if (price < HIGH_PRICE) {
+  } else if (price < PriceByTypes.HIGH_PRICE) {
     return 'high';
   }
 };
@@ -23,32 +26,22 @@ const doFeaturesMatch = (filterAdFeatures, similarAdFeatures) => {
       matchingFeaturesCount++;
     }
   });
-  if (matchingFeaturesCount === filterAdFeatures.length) {
-    return true;
-  } else {
-    return false;
-  }
+  return matchingFeaturesCount === filterAdFeatures.length;
 };
 
 const adOffer = {
-  type: 'any',
-  price: 'any',
-  rooms: 'any',
-  guests: 'any',
+  type: AD_OFFER_DEFAULT_VALUE,
+  price: AD_OFFER_DEFAULT_VALUE,
+  rooms: AD_OFFER_DEFAULT_VALUE,
+  guests: AD_OFFER_DEFAULT_VALUE,
   features: [],
 };
 
-const isAdSimilar = (filterAd, similarAd) => {
-  if  ( (filterAd['type'] === similarAd['type'] || filterAd['type'] === 'any') &&
-        (filterAd['price'] === typeOfPrice(similarAd['price']) || filterAd['price'] === 'any') &&
-        (filterAd['rooms'] === String(similarAd['rooms']) || filterAd['rooms'] === 'any') &&
-        (filterAd['guests'] === String(similarAd['guests']) || filterAd['guests'] === 'any') &&
-        (doFeaturesMatch(filterAd['features'], similarAd['features']) || filterAd['features'].length === 0)) {
-    return true;
-  } else {
-    return false;
-  }
-};
+const isAdSimilar = (filterAd, similarAd) =>  (filterAd.type === similarAd.type || filterAd.type === AD_OFFER_DEFAULT_VALUE) &&
+                                              (filterAd.price === typeOfPrice(similarAd.price) || filterAd.price === AD_OFFER_DEFAULT_VALUE) &&
+                                              (filterAd.rooms === String(similarAd.rooms) || filterAd.rooms === AD_OFFER_DEFAULT_VALUE) &&
+                                              (filterAd.guests === String(similarAd.guests) || filterAd.guests === AD_OFFER_DEFAULT_VALUE) &&
+                                              (doFeaturesMatch(filterAd.features, similarAd.features) || filterAd.features.length === 0);
 
 const debounce = (callback, timeoutDelay = 500) => {
   let timeoutId;

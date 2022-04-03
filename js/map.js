@@ -42,7 +42,7 @@ mainPin.addTo(map);
 
 const address = document.querySelector('#address');
 address.readOnly = true;
-address.value = `${mainPin.getLatLng()['lat']}, ${mainPin.getLatLng()['lng']}`;
+address.value = `${mainPin.getLatLng().lat}, ${mainPin.getLatLng().lng}`;
 mainPin.on('move', (evt) => {
   const {lat, lng} = evt.target.getLatLng();
   address.value = `${lat.toFixed(DECIMAL_POINT)}, ${lng.toFixed(DECIMAL_POINT)}`;
@@ -50,7 +50,7 @@ mainPin.on('move', (evt) => {
 
 const resetMainPin = () => {
   mainPin.setLatLng(MAP_CENTER);
-  address.value = `${MAP_CENTER['lat']}, ${MAP_CENTER['lng']}`;
+  address.value = `${MAP_CENTER.lat}, ${MAP_CENTER.lng}`;
   map.setView(MAP_CENTER, MAP_SCALE);
 };
 
@@ -63,8 +63,8 @@ const adPinIcon = L.icon({
 const createPin = (element) => {
   const adPin = L.marker(
     {
-      lat: element['location']['lat'],
-      lng: element['location']['lng'],
+      lat: element.location.lat,
+      lng: element.location.lng,
     },
     {
       icon: adPinIcon,

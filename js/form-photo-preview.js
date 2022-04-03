@@ -2,7 +2,7 @@ const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 
 const avatarChooser = document.querySelector('.ad-form__field [type=file]');
 const avatarPreview = document.querySelector('.ad-form-header__preview img');
-const photoChooser = document.querySelector('.ad-form__upload [type=file');
+const photoChooser = document.querySelector('.ad-form__upload [type=file]');
 const photoPreview = document.querySelector('.ad-form__photo img');
 
 const setPhotoPreview = (source, target) => {

@@ -19,9 +19,9 @@ resetButton.addEventListener('click', (evt) => {
     popup.remove();
   }
   slider.noUiSlider.updateOptions({
-    start: MinPricePerNight['FLAT'],
+    start: MinPricePerNight.FLAT,
   });
-  adPrice.value = MinPricePerNight['FLAT'];
+  adPrice.value = MinPricePerNight.FLAT;
   avatarPreview.src = DEFAULT_FORM_AVATAR_SRC;
   photoPreview.src = '';
 });
