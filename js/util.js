@@ -74,6 +74,14 @@ const showPinLoadErrorMessage = (message) => {
   document.querySelector('.map__canvas').append(errorContainer);
 };
 
+const removePins = (pins) => {
+  pins.forEach((el, i) => {
+    if (i !== 0) {
+      el.remove();
+    }
+  });
+};
+
 const createMessage = (type) => {
   const messageTemplate = document.querySelector(`#${type}`).content.querySelector(`.${type}`);
   const newMessage = messageTemplate.cloneNode(true);
@@ -100,4 +108,4 @@ const switchFeatureFilter = (array, feature) => {
   }
 };
 
-export { debounce, showPinLoadErrorMessage, createMessage, ERROR_TYPE, SUCCESS_TYPE, switchFeatureFilter, adOffer, isAdSimilar};
+export { removePins, debounce, showPinLoadErrorMessage, createMessage, ERROR_TYPE, SUCCESS_TYPE, switchFeatureFilter, adOffer, isAdSimilar};
