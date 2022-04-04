@@ -23,7 +23,7 @@ const TITLE_MAX_LENGTH = 100;
 const MAX_PRICE = 100000;
 
 const form = document.querySelector('.ad-form');
-const pristine = new Pristine(form, {
+const pristine = new window.Pristine(form, {
   classTo: 'ad-form__element',
   errorTextParent: 'ad-form__element',
   errorTextClass: 'ad-form__error-text'

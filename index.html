@@ -57,6 +57,7 @@
               class="map__filter"
             >
               <option value="any" selected>Любое число гостей</option>
+              <option value="3">Три гостя</option>
               <option value="2">Два гостя</option>
               <option value="1">Один гость</option>
               <option value="0">Не для гостей</option>
@@ -166,6 +167,7 @@
                   id="avatar"
                   name="avatar"
                   class="ad-form-header__input visually-hidden"
+                  accept="image/png, image/jpeg, image/jpg, image/gif"
                 />
                 <label class="ad-form-header__drop-zone" for="avatar"
                   >Загрузить<br />фото...</label
@@ -348,12 +350,15 @@
                   id="images"
                   name="images"
                   class="ad-form__input visually-hidden"
+                  accept="image/png, image/jpeg, image/jpg, image/gif"
                 />
                 <label for="images" class="ad-form__drop-zone"
                   >Загрузить<br />фото...</label
                 >
               </div>
-              <div class="ad-form__photo"></div>
+              <div class="ad-form__photo">
+                <img height='70px' src=''>
+              </div>
             </div>
           </fieldset>
           <fieldset class="ad-form__element ad-form__element--submit">
