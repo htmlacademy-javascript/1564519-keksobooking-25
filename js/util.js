@@ -8,14 +8,20 @@ const PriceByTypes = {
   MEDIUM_PRICE: 50000,
   HIGH_PRICE: 100000
 };
+const PriceTypes = {
+  LOW: 'low',
+  MIDDLE: 'middle',
+  HIGH: 'high'
+};
+
 
 const typeOfPrice = (price) => {
   if (price < PriceByTypes.LOW_PRICE) {
-    return 'low';
+    return PriceTypes.LOW;
   } else if (price < PriceByTypes.MEDIUM_PRICE) {
-    return 'middle';
+    return PriceTypes.MIDDLE;
   } else if (price < PriceByTypes.HIGH_PRICE) {
-    return 'high';
+    return PriceTypes.HIGH;
   }
 };
 
